@@ -1,0 +1,36 @@
+Erreur 1: les filtres n'appliquent pas le background quand ils sont selectionnés:
+
+
+changer 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+	color: #fff;
+	background-color: #BEB45A;
+	border-radius:0 ;
+}
+
+par
+.nav-pills .nav-link.active-tag, .nav-pills .show > .nav-link {
+	color: #fff;
+	background-color: #BEB45A;
+	border-radius:0 ;
+}
+
+Dans le code JS le filtre actif se voit appliquer la classe "active-tag" alors que sur le css le background était appliqué à la classe "active".
+J'ai donc remplacé dans le code css ".nav-link.active" par ".nav-link.active-tag" 
+
+
+Erreur 2: les images ne changent pas dans la modale quand on appuie sur suivant ou précédent:
+
+La variable "index" dans les fonctions nextImage() et prevImage() n'était pas mise à jour correctement.
+
+J'ai ajouté dans prevImage():
+      index = index === 0 ? imagesCollection.length - 1 : index - 1;
+
+Et dans nextImage():
+      index = index === imagesCollection.length - 1 ? 0 : index + 1;
+
+ce qui permet d'assigner à l'index suivant ou précédent l'index de l'image suivante ou précédente dans la liste d'images.
+Aussi, si nous arrivons à la fin de la liste 'imagesCollection.length - 1' index devient 0 soit l'index du premier élément de la liste.
+Et inversement pour précédent, lorsque l'on arrive au premier élément de la liste '0' alors le précédent devient le dernier élément de la liste.
+
+Pour terminer j'ai changer le wording de la variable "next" dans prevImage() car il n'est pas assez explicite. J'ai mis "prev" a la place car en effet on sélectionne l'image précédenete et non suivante.
